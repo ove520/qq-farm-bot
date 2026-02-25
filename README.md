@@ -4,6 +4,10 @@
 
 ## 功能
 
+### 多用户
+- 用户隔离
+- 卡密系统
+
 ### 多账号
 - 账号新增、编辑、删除、启动、停止
 - 扫码登录（QQ）与手动输入 Code
@@ -18,6 +22,8 @@
 - 任务：自动检查并领取（并入统一调度）
 - 推送触发巡田（LandsNotify）开关
 - 好友静默时段（如 23:00-07:00）
+- 偷植物黑名单/白名单
+- 偷的用户黑名单/白名单
 
 ### 面板
 - 概览/农场/背包/好友/分析/账号/设置页面
@@ -62,13 +68,6 @@ npm install
 node client.js
 ```
 
-4. （可选）设置管理密码后启动
-
-```powershell
-$env:ADMIN_PASSWORD="你的强密码"
-node client.js
-```
-
 ### Linux（Ubuntu/Debian 示例）
 
 1. 安装 Node.js 18+
@@ -95,75 +94,13 @@ npm install
 node client.js
 ```
 
-4. 设置管理密码后启动
-
-```bash
-ADMIN_PASSWORD='你的强密码' node client.js
-```
-
 默认面板端口为 `3000`：
 - 本机访问：`http://localhost:3000`
 - 局域网访问：`http://<你的IP>:3000`
 
 ## Docker 部署
 
-项目已提供以下文件：
-- `Dockerfile`
-- `docker-compose.yml`
-- `.dockerignore`
-
-### 使用 Docker Compose（推荐）
-
-1. 进入项目目录
-
-```bash
-cd /path/to/qq-farm-bot-ui
-```
-
-2. 构建并启动
-
-```bash
-docker compose up -d --build
-```
-
-3. 访问面板
-
-- `http://localhost:3000`
-
-4. 查看日志
-
-```bash
-docker compose logs -f
-```
-
-5. 停止并移除容器
-
-```bash
-docker compose down
-```
-
-### 数据持久化
-
-`docker-compose.yml` 已将数据目录映射为：
-- 宿主机：`./data`
-- 容器内：`/app/data`
-
-配置与账号数据会保存在 `./data` 下（如 `store.json`、`accounts.json`）。
-
-### 管理密码
-
-在 `docker-compose.yml` 中通过环境变量设置：
-
-```yaml
-environment:
-  - ADMIN_PASSWORD=你的强密码
-```
-
-修改后重新启动：
-
-```bash
-docker compose up -d
-```
+### 目前不支持
 
 ## 发布为免安装版本（Windows/Linux/macOS）
 
@@ -197,6 +134,7 @@ npm run build:release
 
 ## 登录与安全
 - 面板首次访问需要登录
+- 默认管理用户名：`admin`
 - 默认管理密码：`admin`
 - 建议设置强密码后访问面板
 
@@ -223,7 +161,7 @@ panel/js/init.js             # 前端初始化与事件绑定
 ```
 
 ## 特别感谢
-
+- 主要功能实现：[Penty-d/qq-farm-bot-ui](https://github.com/Penty-d/qq-farm-bot-ui)
 - 核心功能实现：[linguo2625469/qq-farm-bot](https://github.com/linguo2625469/qq-farm-bot)
 - 部分功能实现：[QianChenJun/qq-farm-bot](https://github.com/QianChenJun/qq-farm-bot)
 - 扫码登录功能实现：[lkeme/QRLib](https://github.com/lkeme/QRLib)

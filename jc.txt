@@ -1,0 +1,5 @@
+npm install
+node client.js
+
+set PKG_FETCH_PROGRESS=0
+npm run build:release

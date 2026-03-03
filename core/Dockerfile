@@ -1,8 +1,8 @@
-FROM node:20-alpine AS builder
+FROM node:latest AS builder
 
 WORKDIR /app
 
-RUN corepack enable
+RUN npm install -g corepack --force && corepack enable
 
 # Copy workspace configuration
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
@@ -22,11 +22,11 @@ COPY web ./web
 RUN pnpm build:web
 
 # ==========================================
-FROM node:20-alpine AS prod-deps
+FROM node:latest AS prod-deps
 
 WORKDIR /app
 
-RUN corepack enable
+RUN npm install -g corepack --force && corepack enable
 
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
 COPY core/package.json ./core/
@@ -37,7 +37,7 @@ RUN pnpm -C core install --prod --frozen-lockfile
 
 # ==========================================
 
-FROM node:20-alpine AS runner
+FROM node:latest AS runner
 
 WORKDIR /app/core
 

@@ -1,3 +1,6 @@
+#node:20-alpine老是无法拉取，换成了node:latest
+
+
 # QQ 农场多账号挂机 + Web 面板
 
 基于 Node.js 的 QQ 农场自动化工具，支持多账号管理、Web 控制面板、实时日志与数据分析。
